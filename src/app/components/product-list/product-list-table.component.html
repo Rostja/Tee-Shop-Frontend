@@ -11,11 +11,11 @@
             <td class="fw-semibold text-tea-green">{{ tempProduct.name}}</td>
             <td class="text-center text-success fw-bold">{{ tempProduct.unitPrice | currency:'USD'}}</td>
             <td class="text-center">
-                <span class=badge bg-success *ngIf="tempProduct.unitsInStock > 0">
-                    {{ tempProduct.unitsInStock }} ks
+                <span class="badge bg-dark bg-success" *ngIf="tempProduct.unitsInStock > 0">
+                    ✅{{ tempProduct.unitsInStock }} ks
                 </span>
-                <span class=badge bg-danger *ngIf="tempProduct.unitsInStock === 0">
-                    Sold out    
+                <span class="badge bg-danger" *ngIf="tempProduct.unitsInStock === 0">
+                    ❌Sold out    
                 </span>
             </td>
         </tr>
