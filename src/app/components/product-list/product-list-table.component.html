@@ -12,7 +12,7 @@
             <td class="text-center text-success fw-bold">{{ tempProduct.unitPrice | currency:'USD'}}</td>
             <td class="text-center">
                 <span class="badge bg-dark bg-success" *ngIf="tempProduct.unitsInStock > 0">
-                    ✅{{ tempProduct.unitsInStock }} ks
+                    ✅{{ tempProduct.unitsInStock }} Units
                 </span>
                 <span class="badge bg-danger" *ngIf="tempProduct.unitsInStock === 0">
                     ❌Sold out    
