@@ -1,16 +1,23 @@
-<table class="table">
-    <thead>
+<table class="table table-hover table-bordered shadow-sm rounded bg-light">
+    <thead class="table-success text-center">
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Units in Stock</th>
+            <th scope="col">🍵 Name</th>
+            <th scope="col">💲  Price</th>
+            <th scope="col">📦 Units in Stock</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let tempProduct of products">
-            <td>{{ tempProduct.name}}</td>
-            <td>{{ tempProduct.unitPrice | currency:'USD'}}</td>
-            <td>{{ tempProduct.unitsInStock}}</td>
+            <td class="fw-semibold text-tea-green">{{ tempProduct.name}}</td>
+            <td class="text-center text-success fw-bold">{{ tempProduct.unitPrice | currency:'USD'}}</td>
+            <td class="text-center">
+                <span class=badge bg-success *ngIf="tempProduct.unitsInStock > 0">
+                    {{ tempProduct.unitsInStock }} ks
+                </span>
+                <span class=badge bg-danger *ngIf="tempProduct.unitsInStock === 0">
+                    Sold out    
+                </span>
+            </td>
         </tr>
     </tbody>
 </table>
