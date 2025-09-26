@@ -1,30 +1,20 @@
-<table class="table table-hover table-bordered shadow-sm rounded bg-light">
-    <thead class="table-success text-center">
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">🍵 Name</th>
-            <th scope="col">💲  Price</th>
-            <th scope="col">📦 Units in Stock</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let tempProduct of products">
-            <td class="align-middle fw-semibold text-tea-green d-flex align-items-center">
-                <img [src]="tempProduct.imageUrl" 
-                height="70" 
-                class="img-thumbnail me-2"
-                style="width: 150px; height: 200px; object-fit: cover; border: none;">
-            </td>
-            <td class="align-middle fw-semibold text-tea-green">{{ tempProduct.name}}</td>
-            <td class="align-middle text-center text-success fw-bold">{{ tempProduct.unitPrice | currency:'USD'}}</td>
-            <td class="align-middle text-center">
-                <span class="badge bg-dark bg-success" *ngIf="tempProduct.unitsInStock > 0">
-                    ✅{{ tempProduct.unitsInStock }} Units
-                </span>
-                <span class="badge bg-danger" *ngIf="tempProduct.unitsInStock === 0">
-                    ❌Sold out    
-                </span>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!--loop over the collection of products-->
+
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div class="product-box">
+                        <img src="{{tempProduct.imageUrl}}" class="img-responsive">
+                        <h1> {{tempProduct.name}}</h1>
+                        <div class="price">{{tempProduct.unitPrice | currency:'USD'}}</div>
+                        <a href="#" class="primary-btns">Add to Cart</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
