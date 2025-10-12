@@ -13,13 +13,29 @@ import { Product } from '../../common/product';
 export class ProductListComponent implements OnInit {
   
   products: Product[] = [];
-  constructor(private productService: ProductService) { }
-  ngOnInit(): void {
+  currentCategoryId: number;
+  constructor(private productService: ProductService,
+    private route: ActivatedRoute) { }
+
+  ngOnInit():  {
+    this.route.paramMap.subscribe(() => {
+      this.listProducts();
+    });
     this.listProducts();
   }
 
+  const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+
+  if (hasCategoryId){
+    this.currentCateggoryId = +this.route.snapshot.paramMap.get('id');
+  }
+  else{
+    this.currentCategoryId = 1;
+  }
+
+
   listProducts(){
-    this.productService.getProductList().subscribe(
+    this.productService.getProductList(this.currentCategoryId).subscribe(
       data => {
         this.products = data;
       }
