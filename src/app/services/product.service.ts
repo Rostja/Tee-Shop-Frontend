@@ -15,8 +15,10 @@ export class ProductService {
 
     getProductList(theCategoryId: number): Observable<Product[]> {
 
-      //TODO: need to build URL based on category id ... will come back to this later!
-      return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
+      // need to build URL based on category id ... will come back to this later!
+
+      const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
+      return this.httpClient.get<GetResponse>(searchUrl).pipe(
         map(response => response._embedded.products)
       );
     }
@@ -27,8 +29,4 @@ export class ProductService {
       
     }
   }
-
-function getProductList() {
-  throw new Error('Function not implemented.');
-}
 
