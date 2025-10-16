@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService: ProductService,
     private route: ActivatedRoute) { }
+    temp:number = this.products.length
 
   ngOnInit() {
     this.route.paramMap.subscribe(() => {
