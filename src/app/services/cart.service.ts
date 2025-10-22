@@ -31,8 +31,8 @@ export class CartService {
     // check if we found it
     alreadyExistsInCart = (existingCartItem != undefined);
     }
-    if (alreadyExistsInCart) {
-      existingCartItem!.quantity++;
+    if (alreadyExistsInCart && existingCartItem) {
+      existingCartItem.quantity++;
     } else {
 //just add the item in the array
       this.cartItems.push(theCartItem);
