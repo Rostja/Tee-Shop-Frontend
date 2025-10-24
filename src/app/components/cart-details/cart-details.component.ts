@@ -9,6 +9,7 @@ import { CartService } from '../../services/cart.service';
   styleUrl: './cart-details.component.css'
 })
 export class CartDetailsComponent implements OnInit {
+[x: string]: any;
 
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
@@ -38,3 +39,5 @@ export class CartDetailsComponent implements OnInit {
   }
 
 }
+
+
