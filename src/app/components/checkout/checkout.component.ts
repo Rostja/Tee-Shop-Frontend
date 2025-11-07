@@ -71,7 +71,7 @@ export class CheckoutComponent implements OnInit {
         this.creditCardYears = data;
       }
     );
-    
+
   }
   copyShippingAddressToBillingAddress(event: Event) {
     const checkbox = event.target as HTMLInputElement;
@@ -87,5 +87,25 @@ export class CheckoutComponent implements OnInit {
   onSubmit(){
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer')?.value);
+  }
+
+  handleMonthsAndYears() {
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+    const selectedYear: number = Number(creditCardFormGroup?.value.expirationYear);
+    const currentYear: number = new Date().getFullYear();
+
+    //if the selected year is the current year, then start with the current month 
+    let startMonth: number;
+    if (selectedYear === currentYear) {
+      startMonth = new Date().getMonth() + 1;
+    } else {
+      startMonth = 1;
+    }
+    this.teaShopFormService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieved credit card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    )
   }
 }
