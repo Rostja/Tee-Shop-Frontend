@@ -43,7 +43,7 @@
                         <div class="col-md-2"><label>Country</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country">
+                                <select formControlName="country" (change)="getRegions('shippingAddress')">
                                     <option *ngFor="let country of countries" [ngValue]="country">
                                         {{country.name}}
                                     </option>
@@ -75,7 +75,9 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="region">
-                                    <option>TO DO</option>
+                                    <option *ngFor="let region of shippingAddressRegions" [ngValue]="region">
+                                        {{region.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -108,7 +110,7 @@
                         <div class="col-md-2"><label>Country</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country">
+                                <select formControlName="country" (change)="getRegions('billingAddress')">
                                     <option *ngFor="let country of countries" [ngValue]="country">
                                         {{country.name}}
                                     </option>
@@ -139,8 +141,10 @@
                         <div class="col-md-2"><label>Region</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="region">
-                                    <option>TO DO</option>
+                                <select formControlName="region" (change)="getRegions('billingAddress')">
+                                    <option *ngFor="let region of billingAddressRegions" [ngValue]="region">
+                                        {{region.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
