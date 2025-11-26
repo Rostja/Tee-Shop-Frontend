@@ -1,4 +1,4 @@
-export class State {
+export class Region {
     id: number;
     name: string;
 
