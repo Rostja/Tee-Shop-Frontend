@@ -93,8 +93,14 @@ export class CheckoutComponent implements OnInit {
     if (checkbox.checked) {
     this.checkoutFormGroup.controls['billingAddress']
       .setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
+
+      //bug fix for region
+      this.billingAddressRegions = this.shippingAddressRegions;
   } else {
     this.checkoutFormGroup.controls['billingAddress'].reset();
+
+    //bug fix for region
+    this.billingAddressRegions = [];
   }
 }
 
@@ -107,7 +113,7 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  handleMonthsAndYears() {
+   handleMonthsAndYears() {
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
     const selectedYear: number = Number(creditCardFormGroup?.value.expirationYear);
     const currentYear: number = new Date().getFullYear();
