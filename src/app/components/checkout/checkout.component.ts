@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TeaShopFormService } from '../../services/tea-shop-form.service';
 import { Country } from '../../common/country';
 import { Region } from '../../common/region';
@@ -33,9 +33,9 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: [''],
-        lastName: [''],
-        email: [''],
+        firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+        lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+        email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
 
       }),
       shippingAddress: this.formBuilder.group({
