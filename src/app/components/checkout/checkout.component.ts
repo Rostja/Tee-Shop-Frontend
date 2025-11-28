@@ -62,11 +62,20 @@ export class CheckoutComponent implements OnInit {
                                         TeaShopValidators.notOnlyWhitespace]),
       }),
       billingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        region: [''],
-        country: [''],
-        zipCode: [''],
+        street: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(20),
+                                        TeaShopValidators.notOnlyWhitespace]),
+        city: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(20),
+                                        TeaShopValidators.notOnlyWhitespace]),
+        region: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(8),
+                                        TeaShopValidators.notOnlyWhitespace]),
       }),
       creditCard: this.formBuilder.group({
         cardType: [''],
@@ -127,6 +136,22 @@ export class CheckoutComponent implements OnInit {
   }
   get shippingAddressCountry() {
     return this.checkoutFormGroup.get('shippingAddress.country');
+  }
+
+  get billingAddressStreet() {
+    return this.checkoutFormGroup.get('billingAddress.street');
+  }
+  get billingAddressCity() {
+    return this.checkoutFormGroup.get('billingAddress.city');
+  }
+  get billingAddressRegion() {
+    return this.checkoutFormGroup.get('billingAddress.region');
+  }
+  get billingAddressZipCode() {
+    return this.checkoutFormGroup.get('billingAddress.zipCode');
+  }
+  get billingAddressCountry() {
+    return this.checkoutFormGroup.get('billingAddress.country');
   }
   
   copyShippingAddressToBillingAddress(event: Event) {
