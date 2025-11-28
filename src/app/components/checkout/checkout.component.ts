@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { TeaShopFormService } from '../../services/tea-shop-form.service';
 import { Country } from '../../common/country';
 import { Region } from '../../common/region';
+import { TeaShopValidators } from '../../validators/tea-shop-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -33,8 +34,14 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
-        lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+        firstName: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(20),
+                                        TeaShopValidators.notOnlyWhitespace]),
+        lastName: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(20),
+                                        TeaShopValidators.notOnlyWhitespace]),
         email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
 
       }),
@@ -122,7 +129,7 @@ export class CheckoutComponent implements OnInit {
       this.checkoutFormGroup.markAllAsTouched();
       return;
     }
-    
+
     console.log(this.checkoutFormGroup.get('customer')?.value);
     console.log("The email address is " + this.checkoutFormGroup.get('customer')?.value.email);
     console.log("The shipping address is " + this.checkoutFormGroup.get('shippingAddress')?.value.country.name);
