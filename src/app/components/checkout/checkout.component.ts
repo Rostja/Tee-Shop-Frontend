@@ -58,7 +58,7 @@ export class CheckoutComponent implements OnInit {
         country: new FormControl('', [Validators.required]),
         zipCode: new FormControl('', [Validators.required, 
                                         Validators.minLength(2), 
-                                        Validators.maxLength(20),
+                                        Validators.maxLength(8),
                                         TeaShopValidators.notOnlyWhitespace]),
       }),
       billingAddress: this.formBuilder.group({
@@ -114,19 +114,19 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutFormGroup.get('customer.email');
   }
   get shippingAddressStreet() {
-    return this.checkoutFormGroup.get('customer.shippingAddress.street');
+    return this.checkoutFormGroup.get('shippingAddress.street');
   }
   get shippingAddressCity() {
-    return this.checkoutFormGroup.get('customer.shippingAddress.city');
+    return this.checkoutFormGroup.get('shippingAddress.city');
   }
   get shippingAddressRegion() {
-    return this.checkoutFormGroup.get('customer.shippingAddress.region');
+    return this.checkoutFormGroup.get('shippingAddress.region');
   }
   get shippingAddressZipCode() {
-    return this.checkoutFormGroup.get('customer.shippingAddress.zipCode');
+    return this.checkoutFormGroup.get('shippingAddress.zipCode');
   }
   get shippingAddressCountry() {
-    return this.checkoutFormGroup.get('customer.shippingAddress.country');
+    return this.checkoutFormGroup.get('shippingAddress.country');
   }
   
   copyShippingAddressToBillingAddress(event: Event) {
