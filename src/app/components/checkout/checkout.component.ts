@@ -46,11 +46,20 @@ export class CheckoutComponent implements OnInit {
 
       }),
       shippingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        region: [''],
-        country: [''],
-        zipCode: [''],
+        street: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(20),
+                                        TeaShopValidators.notOnlyWhitespace]),
+        city: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(20),
+                                        TeaShopValidators.notOnlyWhitespace]),
+        region: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, 
+                                        Validators.minLength(2), 
+                                        Validators.maxLength(20),
+                                        TeaShopValidators.notOnlyWhitespace]),
       }),
       billingAddress: this.formBuilder.group({
         street: [''],
@@ -103,6 +112,21 @@ export class CheckoutComponent implements OnInit {
   }
   get email() {
     return this.checkoutFormGroup.get('customer.email');
+  }
+  get shippingAddressStreet() {
+    return this.checkoutFormGroup.get('customer.shippingAddress.street');
+  }
+  get shippingAddressCity() {
+    return this.checkoutFormGroup.get('customer.shippingAddress.city');
+  }
+  get shippingAddressRegion() {
+    return this.checkoutFormGroup.get('customer.shippingAddress.region');
+  }
+  get shippingAddressZipCode() {
+    return this.checkoutFormGroup.get('customer.shippingAddress.zipCode');
+  }
+  get shippingAddressCountry() {
+    return this.checkoutFormGroup.get('customer.shippingAddress.country');
   }
   
   copyShippingAddressToBillingAddress(event: Event) {
