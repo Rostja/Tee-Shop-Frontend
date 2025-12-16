@@ -215,7 +215,7 @@
                                     <div *ngIf="billingAddressStreet?.errors?.['required'] || billingAddressStreet?.errors?.['notOnlyWhitespace']">
                                         Street is required
                                     </div>
-                                    <div *ngIf="billingAddressCity?.errors?.['minlength']">
+                                    <div *ngIf="billingAddressStreet?.errors?.['minlength']">
                                         Street must be at least 2 characters long
                                     </div>
                                 </div>
