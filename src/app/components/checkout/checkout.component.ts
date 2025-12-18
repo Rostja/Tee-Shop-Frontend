@@ -4,6 +4,7 @@ import { TeaShopFormService } from '../../services/tea-shop-form.service';
 import { Country } from '../../common/country';
 import { Region } from '../../common/region';
 import { TeaShopValidators } from '../../validators/tea-shop-validators';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -28,10 +29,13 @@ export class CheckoutComponent implements OnInit {
   billingAddressRegions: Region[] = [];
 
   constructor(private formBuilder: FormBuilder,
-              private teaShopFormService: TeaShopFormService
+              private teaShopFormService: TeaShopFormService,
+              private cartService: CartService
   ) { }
 
   ngOnInit(): void {
+    this.reviewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, 
@@ -115,6 +119,16 @@ export class CheckoutComponent implements OnInit {
         console.log("Retrieved countries: " + JSON.stringify(data));
         this.countries = data;
       }
+    );
+  }
+  reviewCartDetails() {
+    //subscribe to cart totalPrice
+    this.cartService.totalPrice.subscribe(
+      totalPrice => this.totalPrice = totalPrice
+    );
+    //subscribe to cart totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => this.totalQuantity = totalQuantity
     );
   }
 
