@@ -1,0 +1,34 @@
+.login-status-header {
+  margin: 0 20px;
+}
+
+.login-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-message {
+  color: #333;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.security-btn {
+  background-color: #205b8d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.security-btn:hover {
+  background-color: #17466b;
+}
+
+.security-btn i {
+  margin-right: 5px;
+}

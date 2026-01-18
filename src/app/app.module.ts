@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // ✅ Auth0 importy
 import { AuthGuard, AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
-import myAppConfig from './config/my-app-config';
+import {myAppConfig} from './config/my-app-config';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 // Komponenty
@@ -55,12 +55,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     
     // ✅ Auth0 konfigurácia
-    AuthModule.forRoot({
-      ...myAppConfig.auth,
-      httpInterceptor: {
-        ...myAppConfig.httpInterceptor,
-      },
-    }),
+    AuthModule.forRoot(myAppConfig.auth),  // ✅ Všetko je v auth objekte
     LoginStatusComponent
   ],
   providers: [

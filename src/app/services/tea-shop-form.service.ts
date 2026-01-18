@@ -10,8 +10,8 @@ import { Region } from '../common/region';
 })
 export class TeaShopFormService {
 
-  private countriesUrl = 'http://localhost:8080/api/countries';
-  private regionsUrl = 'http://localhost:8080/api/regions';
+  private countriesUrl = 'https://localhost:8080/api/countries';
+  private regionsUrl = 'https://localhost:8080/api/regions';
 
   constructor(private httpClient: HttpClient) { }
 

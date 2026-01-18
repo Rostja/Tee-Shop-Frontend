@@ -1,1 +1,24 @@
-<p>login-status works!</p>
+<div class="login-status-header">
+  
+  <!-- ❌ Ak NIE JE prihlásený -->
+  @if (!isAuthenticated) {
+    <div class="login-status">
+      <button class="security-btn" (click)="login()">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+    </div>
+  }
+
+  <!-- ✅ Ak JE prihlásený -->
+  @if (isAuthenticated && userEmail) {
+    <div class="login-status">
+      <span class="welcome-message">
+        Welcome, {{ userEmail }}!
+      </span>
+      <button class="security-btn" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  }
+
+</div>

@@ -70,6 +70,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+           "options": {
+              "ssl": true,
+              "sslKey": "./ssl/key.pem",
+              "sslCert": "./ssl/cert.pem"
+            },
           "configurations": {
             "production": {
               "buildTarget": "angular-ecommerce:build:production"
