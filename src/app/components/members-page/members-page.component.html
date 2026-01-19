@@ -1,7 +1,16 @@
-<div class="main-content">
-    <div align="center" class="alert alert-warning col-md-12" role="alert">
-        <h3>Members Special</h3>
-        <p>Thank your for being a member</p>
-        <p>Member discounts are coming soon</p>
-    </div>
+<div class="members-page">
+  <div class="container">
+    <h2>Members Only Area</h2>
+    
+    @if (isAuthenticated) {
+      <div class="member-content">
+        <h1>Welcome to the exclusive members area, <strong>{{ userEmail }}</strong>!</h1>
+        <p>You have access to premium content.</p>
+      </div>
+    } @else {
+      <div class="access-denied">
+        <h1>Please log in to access this page.</h1>
+      </div>
+    }
+  </div>
 </div>

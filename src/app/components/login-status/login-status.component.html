@@ -10,15 +10,36 @@
   }
 
   <!-- ✅ Ak JE prihlásený -->
-  @if (isAuthenticated && userEmail) {
+  @if (isAuthenticated) {
     <div class="login-status">
-      <span class="welcome-message">
-        Welcome, {{ userEmail }}!
-      </span>
-      <button class="security-btn" (click)="logout()">
+      <!-- User Avatar (ak existuje) -->
+      @if (userPicture) {
+        <img [src]="userPicture" alt="User Avatar" class="user-avatar">
+      }
+      
+      <!-- User Info -->
+      <div class="user-info">
+        @if (userName) {
+          <span class="user-name">{{ userName }}</span>
+        }
+        @if (userEmail) {
+          <span class="user-email">{{ userEmail }}</span>
+        }
+      </div>
+
+      <!-- Member Button -->
+  
+      <button (click)="goToMembers()" routerLink="/members" class="security-btn">
+        <i class="fas fa-user-shield"></i>
+        Members
+        </button>
+
+      <!-- Logout Button -->
+      <button class="security-btn btn-logout" (click)="logout()">
         <i class="fas fa-sign-out-alt"></i> Logout
       </button>
     </div>
+  
   }
 
 </div>

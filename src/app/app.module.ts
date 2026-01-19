@@ -27,7 +27,13 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 import { ProductService } from './services/product.service';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 
+function sendToLoginPage(authGuardRedirectFn: any) {
+  return authGuardRedirectFn({ loginOptions: { appState: { target: '/members' } } });
+}
+
 const routes: Routes = [
+  { path: 'members', component: MembersPageComponent, canActivate: [AuthGuard],
+        data: {onAuthRequired: sendToLoginPage}},  // ✅ Chránená trasa
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'products/:id', component: ProductDetailsComponent },

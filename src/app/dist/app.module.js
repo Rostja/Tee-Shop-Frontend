@@ -29,7 +29,13 @@ var checkout_component_1 = require("./components/checkout/checkout.component");
 var login_status_component_1 = require("./components/login-status/login-status.component");
 // Servisy
 var product_service_1 = require("./services/product.service");
+var members_page_component_1 = require("./components/members-page/members-page.component");
+function sendToLoginPage(authGuardRedirectFn) {
+    return authGuardRedirectFn({ loginOptions: { appState: { target: '/members' } } });
+}
 var routes = [
+    { path: 'members', component: members_page_component_1.MembersPageComponent, canActivate: [auth0_angular_1.AuthGuard],
+        data: { onAuthRequired: sendToLoginPage } },
     { path: 'checkout', component: checkout_component_1.CheckoutComponent },
     { path: 'cart-details', component: cart_details_component_1.CartDetailsComponent },
     { path: 'products/:id', component: product_details_component_1.ProductDetailsComponent },
@@ -53,7 +59,8 @@ var AppModule = /** @class */ (function () {
                 product_details_component_1.ProductDetailsComponent,
                 cart_status_component_1.CartStatusComponent,
                 cart_details_component_1.CartDetailsComponent,
-                checkout_component_1.CheckoutComponent
+                checkout_component_1.CheckoutComponent,
+                members_page_component_1.MembersPageComponent
             ],
             imports: [
                 router_1.RouterModule.forRoot(routes),
