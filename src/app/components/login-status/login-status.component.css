@@ -1,5 +1,9 @@
 .login-status-header {
-  margin: 0 20px;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-moz-box;
+    display:-ms-flexbox;
+    display:flex;
 }
 
 .login-status {

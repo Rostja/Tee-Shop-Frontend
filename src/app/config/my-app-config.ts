@@ -5,6 +5,7 @@ export const myAppConfig = {
     authorizationParams: {
       redirect_uri: 'https://localhost:4200',  // ✅ HTTPS
       audience: 'https://localhost:8080',      // ✅ HTTPS
+     
     },
     httpInterceptor: {
       allowedList: [
