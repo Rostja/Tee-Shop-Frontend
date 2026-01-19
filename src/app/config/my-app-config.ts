@@ -1,4 +1,4 @@
-export const myAppConfig = {
+export default {
   auth: {
     domain: 'dev-e5n86jksvaryvb6x.us.auth0.com',
     clientId: 'EnRCxVS9TcXyV3bVjnwUOx954Qn0w9pO',

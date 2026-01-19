@@ -13,7 +13,7 @@ var http_1 = require("@angular/common/http");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-// ✅ Auth0 importy
+// Auth
 var auth0_angular_1 = require("@auth0/auth0-angular");
 var my_app_config_1 = require("./config/my-app-config");
 var auth_interceptor_service_1 = require("./services/auth-interceptor.service");
@@ -62,7 +62,7 @@ var AppModule = /** @class */ (function () {
                 ng_bootstrap_1.NgbModule,
                 forms_1.ReactiveFormsModule,
                 // ✅ Auth0 konfigurácia
-                auth0_angular_1.AuthModule.forRoot(my_app_config_1.myAppConfig.auth),
+                auth0_angular_1.AuthModule.forRoot(my_app_config_1["default"].auth),
                 login_status_component_1.LoginStatusComponent
             ],
             providers: [
