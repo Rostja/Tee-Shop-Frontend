@@ -25,6 +25,7 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 
 // Servisy
 import { ProductService } from './services/product.service';
+import { MembersPageComponent } from './components/members-page/members-page.component';
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
@@ -47,7 +48,8 @@ const routes: Routes = [
     ProductDetailsComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    MembersPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
