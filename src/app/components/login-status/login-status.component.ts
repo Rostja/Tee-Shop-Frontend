@@ -18,6 +18,8 @@ export class LoginStatusComponent implements OnInit, OnDestroy {
   userEmail: string | null = null;
   userName: string | null = null;
   userPicture: string | null = null;
+
+  storage: Storage = sessionStorage;
   
   private authSubscription?: Subscription;
   private userSubscription?: Subscription;
@@ -62,6 +64,39 @@ export class LoginStatusComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+   getUserDetails(): void {
+    if (this.isAuthenticated) {
+      // Fetch the logged in user details (user's claims)
+      this.userSubscription = this.auth.user$.subscribe(
+        (user) => {
+          if (user) {
+            // Set user properties
+            this.userEmail = user.email || null;
+            this.userName = user.name || user.nickname || null;
+            this.userPicture = user.picture || this.getDefaultAvatar();
+
+            // Store email in browser storage
+            if (user.email) {
+              this.storage.setItem('userEmail', JSON.stringify(user.email));
+            }
+
+            console.log('User details loaded:', {
+              email: this.userEmail,
+              name: this.userName,
+              picture: this.userPicture
+            });
+          }
+        },
+        (error) => {
+          console.error('Error loading user details:', error);
+        }
+      );
+    }
+  }
+      
+    
+  
 
   ngOnDestroy(): void {
     this.authSubscription?.unsubscribe();

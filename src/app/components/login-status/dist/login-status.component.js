@@ -23,6 +23,7 @@ var LoginStatusComponent = /** @class */ (function () {
         this.userEmail = null;
         this.userName = null;
         this.userPicture = null;
+        this.storage = sessionStorage;
     }
     LoginStatusComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -48,6 +49,31 @@ var LoginStatusComponent = /** @class */ (function () {
                 _this.clearUserData();
             }
         });
+    };
+    LoginStatusComponent.prototype.getUserDetails = function () {
+        var _this = this;
+        if (this.isAuthenticated) {
+            // Fetch the logged in user details (user's claims)
+            this.userSubscription = this.auth.user$.subscribe(function (user) {
+                if (user) {
+                    // Set user properties
+                    _this.userEmail = user.email || null;
+                    _this.userName = user.name || user.nickname || null;
+                    _this.userPicture = user.picture || _this.getDefaultAvatar();
+                    // Store email in browser storage
+                    if (user.email) {
+                        _this.storage.setItem('userEmail', JSON.stringify(user.email));
+                    }
+                    console.log('User details loaded:', {
+                        email: _this.userEmail,
+                        name: _this.userName,
+                        picture: _this.userPicture
+                    });
+                }
+            }, function (error) {
+                console.error('Error loading user details:', error);
+            });
+        }
     };
     LoginStatusComponent.prototype.ngOnDestroy = function () {
         var _a, _b, _c;
