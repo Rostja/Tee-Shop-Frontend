@@ -3,29 +3,42 @@
         <div class="container-fluid">
             <h3>Your Orders</h3>
 
-            <div *ngIf="orderHistoryList.length > 0"></div>
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th width="20%">Order Tracking Number</th>
-                        <th width="10%">Total Price</th>
-                        <th width="10%">Total Quantity</th>
-                        <th width="10%">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let tempOrderHistory of orderHistoryList">
-                        <td>{{ tempOrderHistory.orderTrackingNumber }}</td>
-                        <td>{{ tempOrderHistory.totalPrice | currency: 'EUR' }}</td>
-                        <td>{{ tempOrderHistory.totalQuantity}}</td>
-                        <td>{{ tempOrderHistory.dateCreated | date:'medium'}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <!--if order history is empty then display a message-->
-        <div *ngIf="orderHistoryList.length === 0" class="alert alert-warning col-md-12" role="alert">
-            <h4>You have no orders in your history.</h4>
+            <!-- Loading spinner -->
+            <div *ngIf="isLoading" class="alert alert-info" role="alert">
+                <h4>⏳ Loading your orders...</h4>
+            </div>
+
+            <!-- Error message -->
+            <div *ngIf="errorMessage && !isLoading" class="alert alert-danger" role="alert">
+                <h4>❌ {{ errorMessage }}</h4>
+            </div>
+
+            <!-- Tabuľka s objednávkami -->
+            <div *ngIf="orderHistoryList.length > 0 && !isLoading">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="20%">Order Tracking Number</th>
+                            <th width="10%">Total Price</th>
+                            <th width="10%">Total Quantity</th>
+                            <th width="10%">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tempOrderHistory of orderHistoryList">
+                            <td>{{ tempOrderHistory.orderTrackingNumber }}</td>
+                            <td>{{ tempOrderHistory.totalPrice | currency: 'EUR' }}</td>
+                            <td>{{ tempOrderHistory.totalQuantity }}</td>
+                            <td>{{ tempOrderHistory.dateCreated | date:'medium' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Ak nie sú žiadne objednávky -->
+            <div *ngIf="orderHistoryList.length === 0 && !isLoading && !errorMessage" class="alert alert-warning col-md-12" role="alert">
+                <h4>📭 You have no orders in your history.</h4>
+            </div>
         </div>
     </div>
 </div>

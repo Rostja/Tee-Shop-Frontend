@@ -27,6 +27,27 @@ var LoginStatusComponent = /** @class */ (function () {
     }
     LoginStatusComponent.prototype.ngOnInit = function () {
         var _this = this;
+        // ✅ Sleduj prihlásenie používateľa
+        this.auth.isAuthenticated$.subscribe({
+            next: function (isAuthenticated) {
+                _this.isAuthenticated = isAuthenticated;
+                if (isAuthenticated) {
+                    // ✅ Získaj používateľa a ulož email
+                    _this.auth.user$.subscribe({
+                        next: function (user) {
+                            if (user) {
+                                _this.userName = user.name || user.email || 'User';
+                                // ✅ Ulož email do sessionStorage
+                                if (user.email) {
+                                    _this.storage.setItem('userEmail', user.email);
+                                    console.log('✅ Email saved to sessionStorage:', user.email);
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
         this.loadingSubscription = this.auth.isLoading$.subscribe(function (loading) {
             _this.isLoading = loading;
         });
@@ -85,6 +106,9 @@ var LoginStatusComponent = /** @class */ (function () {
         this.auth.loginWithRedirect();
     };
     LoginStatusComponent.prototype.logout = function () {
+        // ✅ Vymaž sessionStorage pri odhlásení
+        this.storage.removeItem('userEmail');
+        console.log('🗑️ Email removed from sessionStorage');
         this.clearUserData();
         this.auth.logout({
             logoutParams: {

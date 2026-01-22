@@ -33,6 +33,30 @@ export class LoginStatusComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+     // ✅ Sleduj prihlásenie používateľa
+    this.auth.isAuthenticated$.subscribe({
+      next: (isAuthenticated) => {
+        this.isAuthenticated = isAuthenticated;
+
+        if (isAuthenticated) {
+          // ✅ Získaj používateľa a ulož email
+          this.auth.user$.subscribe({
+            next: (user) => {
+              if (user) {
+                this.userName = user.name || user.email || 'User';
+                
+                // ✅ Ulož email do sessionStorage
+                if (user.email) {
+                  this.storage.setItem('userEmail', user.email);
+                  console.log('✅ Email saved to sessionStorage:', user.email);
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+
     this.loadingSubscription = this.auth.isLoading$.subscribe(
       (loading: boolean) => {
         this.isLoading = loading;
@@ -110,6 +134,10 @@ export class LoginStatusComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
+      // ✅ Vymaž sessionStorage pri odhlásení
+    this.storage.removeItem('userEmail');
+    console.log('🗑️ Email removed from sessionStorage');
+    
     this.clearUserData();
     this.auth.logout({ 
       logoutParams: { 
