@@ -33,6 +33,8 @@ export class CheckoutComponent implements OnInit {
   shippingAddressRegions: Region[] = [];
   billingAddressRegions: Region[] = [];
 
+  storage: Storage = sessionStorage;
+
   constructor(private formBuilder: FormBuilder,
               private teaShopFormService: TeaShopFormService,
               private cartService: CartService,
@@ -42,6 +44,12 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.reviewCartDetails();
+
+    //read the users email address from browser storage
+
+    const theEmail = this.storage.getItem('userEmail');
+    console.log("Retrieved email from storage: " + theEmail);
+
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -53,7 +61,7 @@ export class CheckoutComponent implements OnInit {
                                         Validators.minLength(2), 
                                         Validators.maxLength(20),
                                         TeaShopValidators.notOnlyWhitespace]),
-        email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
+        email: new FormControl(theEmail, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
 
       }),
       shippingAddress: this.formBuilder.group({
