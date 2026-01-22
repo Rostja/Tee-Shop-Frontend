@@ -39,6 +39,13 @@
         <i class="fas fa-sign-out-alt"></i> Logout
       </button>
     </div>
+
+    <!-- Order Button -->
+  
+      <button *ngIf="isAuthenticated" (click)="goToOrders()"class="security-btn btn-orders">
+        <i class="fas fa-clipboard-list"></i>
+        Orders
+        </button>
   
   }
 

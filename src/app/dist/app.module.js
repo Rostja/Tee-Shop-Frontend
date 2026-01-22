@@ -30,10 +30,13 @@ var login_status_component_1 = require("./components/login-status/login-status.c
 // Servisy
 var product_service_1 = require("./services/product.service");
 var members_page_component_1 = require("./components/members-page/members-page.component");
+var order_history_component_1 = require("./components/order-history/order-history.component");
 function sendToLoginPage(authGuardRedirectFn) {
     return authGuardRedirectFn({ loginOptions: { appState: { target: '/members' } } });
 }
 var routes = [
+    { path: 'order-history', component: order_history_component_1.OrderHistoryComponent, canActivate: [auth0_angular_1.AuthGuard],
+        data: { onAuthRequired: sendToLoginPage } },
     { path: 'members', component: members_page_component_1.MembersPageComponent, canActivate: [auth0_angular_1.AuthGuard],
         data: { onAuthRequired: sendToLoginPage } },
     { path: 'checkout', component: checkout_component_1.CheckoutComponent },
@@ -60,7 +63,8 @@ var AppModule = /** @class */ (function () {
                 cart_status_component_1.CartStatusComponent,
                 cart_details_component_1.CartDetailsComponent,
                 checkout_component_1.CheckoutComponent,
-                members_page_component_1.MembersPageComponent
+                members_page_component_1.MembersPageComponent,
+                order_history_component_1.OrderHistoryComponent
             ],
             imports: [
                 router_1.RouterModule.forRoot(routes),

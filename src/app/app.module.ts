@@ -33,6 +33,8 @@ function sendToLoginPage(authGuardRedirectFn: any) {
 }
 
 const routes: Routes = [
+   { path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard],
+        data: {onAuthRequired: sendToLoginPage}},
   { path: 'members', component: MembersPageComponent, canActivate: [AuthGuard],
         data: {onAuthRequired: sendToLoginPage}},  // ✅ Chránená trasa
   { path: 'checkout', component: CheckoutComponent },

@@ -80,11 +80,21 @@
 /* Logout Button - Red variant */
 .btn-logout {
   background-color: #dc3545;
+  margin-right: 10px;
 }
 
 .btn-logout:hover {
   background-color: #c82333;
   box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-orders {
+    background-color: #03d53b;
+}
+
+.btn-orders:hover {
+    background-color: #068b29;
+    box-shadow: 0 4px 8px rgba(13, 196, 83, 0.536);
 }
 
 /* Margin utilities */
@@ -118,6 +128,7 @@
   .security-btn {
     padding: 8px 14px;
     font-size: 13px;
+   
   }
 
   .security-btn span {

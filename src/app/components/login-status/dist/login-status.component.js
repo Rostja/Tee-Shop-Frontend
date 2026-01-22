@@ -95,6 +95,9 @@ var LoginStatusComponent = /** @class */ (function () {
     LoginStatusComponent.prototype.goToMembers = function () {
         this.router.navigate(['/members']);
     };
+    LoginStatusComponent.prototype.goToOrders = function () {
+        this.router.navigate(['/order-history']);
+    };
     // 🎨 Fallback avatar ak Auth0 neposkytuje obrázok
     LoginStatusComponent.prototype.getDefaultAvatar = function () {
         return 'https://ui-avatars.com/api/?name=' +

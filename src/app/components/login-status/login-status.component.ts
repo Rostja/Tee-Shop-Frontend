@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './login-status.component.css'
 })
 export class LoginStatusComponent implements OnInit, OnDestroy {
+
   isAuthenticated: boolean = false;
   isLoading: boolean = true;
   userEmail: string | null = null;
@@ -119,6 +120,10 @@ export class LoginStatusComponent implements OnInit, OnDestroy {
   goToMembers(): void {
     this.router.navigate(['/members']);
   }
+
+  goToOrders() {
+  this.router.navigate(['/order-history']);
+}
 
   // 🎨 Fallback avatar ak Auth0 neposkytuje obrázok
   private getDefaultAvatar(): string {
