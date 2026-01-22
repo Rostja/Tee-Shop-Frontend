@@ -26,6 +26,7 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 // Servisy
 import { ProductService } from './services/product.service';
 import { MembersPageComponent } from './components/members-page/members-page.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 function sendToLoginPage(authGuardRedirectFn: any) {
   return authGuardRedirectFn({ loginOptions: { appState: { target: '/members' } } });
@@ -55,7 +56,8 @@ const routes: Routes = [
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    MembersPageComponent
+    MembersPageComponent,
+    OrderHistoryComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

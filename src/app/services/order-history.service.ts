@@ -12,11 +12,11 @@ export class OrderHistoryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getOrderHistory(theEmail: string ): Observable<GetResponseOrderHistory> {
+  getOrderHistory(theEmail: string): Observable<GetResponseOrderHistory> {
     //build URL based on email
-    const orderHistoryUrl = `${this.orderUrl}/search/findByCustomerEmailOrderByDateCreatedDesc?email=${theEmail}`;
+    const orderHistoryUrl = `${this.orderUrl}/search/findByCustomerEmail?email=${theEmail}`;
     return this.httpClient.get<GetResponseOrderHistory>(orderHistoryUrl);
-  }
+    }
   }
 
   interface GetResponseOrderHistory {

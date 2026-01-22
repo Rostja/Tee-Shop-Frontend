@@ -15,7 +15,7 @@ var OrderHistoryService = /** @class */ (function () {
     }
     OrderHistoryService.prototype.getOrderHistory = function (theEmail) {
         //build URL based on email
-        var orderHistoryUrl = this.orderUrl + "/search/findByCustomerEmailOrderByDateCreatedDesc?email=" + theEmail;
+        var orderHistoryUrl = this.orderUrl + "/search/findByCustomerEmail?email=" + theEmail;
         return this.httpClient.get(orderHistoryUrl);
     };
     OrderHistoryService = __decorate([
