@@ -25,6 +25,7 @@ var ProductService = /** @class */ (function () {
         // need to build URL based on category id, page and size
         var searchUrl = this.baseUrl + "/search/findByCategoryId?id=" + theCategoryId
             + ("&page=" + thePage + "&size=" + thePageSize);
+        console.log("Getting products from URL: " + searchUrl);
         return this.httpClient.get(searchUrl);
     };
     ProductService.prototype.getProductList = function (theCategoryId) {
