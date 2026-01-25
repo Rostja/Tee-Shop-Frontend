@@ -98,6 +98,9 @@
             },
             "development": {
               "buildTarget": "angular-ecommerce:build:development"
+            }, 
+            "qa": {
+              "buildTarget": "angular-ecommerce:build:qa"
             }
           },
           "defaultConfiguration": "development"
