@@ -45,6 +45,7 @@ exports.__esModule = true;
 exports.AuthInterceptorService = void 0;
 var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
+var environment_1 = require("../../environments/environment");
 var AuthInterceptorService = /** @class */ (function () {
     function AuthInterceptorService(auth) {
         this.auth = auth;
@@ -54,13 +55,14 @@ var AuthInterceptorService = /** @class */ (function () {
     };
     AuthInterceptorService.prototype.handleAccess = function (request, next) {
         return __awaiter(this, void 0, Promise, function () {
-            var securedEndpoints, token, error_1;
+            var theEndpoint, securedEndpoints, token, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        theEndpoint = environment_1.environment.teaShopApiUrl + '/orders';
                         securedEndpoints = [
-                            'https://localhost:8080/api/orders',
-                            'https://localhost:8080/api/checkout/purchase' // ✅ Pridaj checkout endpoint
+                            theEndpoint,
+                            theEndpoint + '/checkout/purchase' // ✅ Pridaj checkout endpoint
                         ];
                         if (!securedEndpoints.some(function (url) { return request.urlWithParams.includes(url); })) return [3 /*break*/, 4];
                         _a.label = 1;

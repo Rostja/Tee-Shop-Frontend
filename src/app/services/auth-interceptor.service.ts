@@ -7,6 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { from, lastValueFrom, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptorService implements HttpInterceptor {
@@ -17,9 +18,10 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
+    const theEndpoint = environment.teaShopApiUrl + '/orders';
     const securedEndpoints = [
-      'https://localhost:8080/api/orders',
-      'https://localhost:8080/api/checkout/purchase'  // ✅ Pridaj checkout endpoint
+      theEndpoint,
+      theEndpoint + '/checkout/purchase'  // ✅ Pridaj checkout endpoint
     ];
 
     if (securedEndpoints.some((url) => request.urlWithParams.includes(url))) {

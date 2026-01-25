@@ -9,11 +9,12 @@ exports.__esModule = true;
 exports.ProductService = void 0;
 var core_1 = require("@angular/core");
 var operators_1 = require("rxjs/operators");
+var environment_1 = require("../../environments/environment");
 var ProductService = /** @class */ (function () {
     function ProductService(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = "https://localhost:8080/api/products";
-        this.categoryUrl = "https://localhost:8080/api/product-category";
+        this.baseUrl = environment_1.environment.teaShopApiUrl + "/products";
+        this.categoryUrl = environment_1.environment.teaShopApiUrl + "/product-category";
     }
     ProductService.prototype.getProduct = function (theProductId) {
         //need to build URL based on product id

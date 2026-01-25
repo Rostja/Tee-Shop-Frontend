@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { Country } from '../common/country';
 import { Region } from '../common/region';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -10,8 +11,8 @@ import { Region } from '../common/region';
 })
 export class TeaShopFormService {
 
-  private countriesUrl = 'https://localhost:8080/api/countries';
-  private regionsUrl = 'https://localhost:8080/api/regions';
+  private countriesUrl = environment.teaShopApiUrl + '/countries';
+  private regionsUrl = environment.teaShopApiUrl + '/regions';
 
   constructor(private httpClient: HttpClient) { }
 

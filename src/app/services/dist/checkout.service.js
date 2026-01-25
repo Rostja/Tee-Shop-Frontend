@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.CheckoutService = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("../../environments/environment");
 var CheckoutService = /** @class */ (function () {
     function CheckoutService(httpClient) {
         this.httpClient = httpClient;
-        this.purchaseUrl = 'https://localhost:8080/api/checkout/purchase';
+        this.purchaseUrl = environment_1.environment.teaShopApiUrl + '/checkout/purchase';
     }
     CheckoutService.prototype.placeOrder = function (purchase) {
         return this.httpClient.post(this.purchaseUrl, purchase);

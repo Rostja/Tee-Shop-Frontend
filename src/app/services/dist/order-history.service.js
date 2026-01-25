@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.OrderHistoryService = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("../../environments/environment");
 var OrderHistoryService = /** @class */ (function () {
     function OrderHistoryService(httpClient) {
         this.httpClient = httpClient;
-        this.orderUrl = 'https://localhost:8080/api/orders';
+        this.orderUrl = environment_1.environment.teaShopApiUrl + '/orders';
     }
     OrderHistoryService.prototype.getOrderHistory = function (theEmail) {
         //build URL based on email

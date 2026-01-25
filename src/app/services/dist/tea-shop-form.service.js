@@ -9,11 +9,12 @@ exports.__esModule = true;
 exports.TeaShopFormService = void 0;
 var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
+var environment_1 = require("../../environments/environment");
 var TeaShopFormService = /** @class */ (function () {
     function TeaShopFormService(httpClient) {
         this.httpClient = httpClient;
-        this.countriesUrl = 'https://localhost:8080/api/countries';
-        this.regionsUrl = 'https://localhost:8080/api/regions';
+        this.countriesUrl = environment_1.environment.teaShopApiUrl + '/countries';
+        this.regionsUrl = environment_1.environment.teaShopApiUrl + '/regions';
     }
     TeaShopFormService.prototype.getCountries = function () {
         return this.httpClient.get(this.countriesUrl).pipe(rxjs_1.map(function (response) { return response._embedded.countries; }));
