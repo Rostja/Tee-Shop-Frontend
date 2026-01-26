@@ -1,0 +1,75 @@
+/* --- Tabuľka --- */
+.cart-table {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.cart-table th,
+.cart-table td {
+  vertical-align: middle;
+  border-color: #dee2e6 !important;
+}
+
+.cart-table tbody tr:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* --- Produkt obrázok --- */
+.cart-img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #eee;
+  padding: 5px;
+  background: #fafafa;
+}
+
+/* --- Tlačidlá --- */
+.btn-outline-secondary {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.btn-outline-danger {
+  border-radius: 6px;
+}
+
+/* --- Patička tabuľky --- */
+tfoot tr td {
+  border-top: 2px solid #dee2e6 !important;
+  font-size: 1rem;
+}
+
+/* --- Efekty --- */
+.table-success {
+  background-color: #e6ffee !important;
+}
+
+/* --- Empty Cart --- */
+.empty-cart {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.empty-cart-img {
+  width: 250px;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

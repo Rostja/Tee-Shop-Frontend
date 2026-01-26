@@ -1,0 +1,29 @@
+.members-page {
+  padding: 40px 20px;
+  min-height: 60vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.member-content {
+  background-color: #f0f8ff;
+  padding: 30px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.access-denied {
+  background-color: #fff3cd;
+  padding: 30px;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+  color: #856404;
+}

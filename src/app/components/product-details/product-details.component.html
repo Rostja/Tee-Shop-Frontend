@@ -1,0 +1,23 @@
+<!-- LOADER: zobrazí sa, kým sa načítava produkt -->
+<div *ngIf="!product" class="loader-container">
+  <div class="skeleton-img shimmer"></div>
+  <div class="skeleton-text shimmer" style="width: 60%; height: 24px;"></div>
+  <div class="skeleton-text shimmer" style="width: 40%; height: 20px;"></div>
+  <div class="skeleton-text shimmer" style="width: 80%; height: 18px;"></div>
+</div>
+
+<div class="detail-section" *ngIf="product">
+    <div class="container-fluid">
+        
+        <img src="{{product.imageUrl}}" class="detail-img">
+        <h3>{{product.name}}</h3>
+        <div class="price">{{product.unitPrice | currency:'USD'}}</div>
+        <button (click)="addToCart()" class="btn btn-primary btn-sm">Add to cart</button>
+
+        <hr>
+        <h4>Description</h4>
+        <p>{{product.description}}</p>
+
+        <a routerLink="/products" class="mt-5">Back to product list!</a>
+    </div>
+</div>
