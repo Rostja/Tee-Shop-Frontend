@@ -304,19 +304,50 @@ export class CheckoutComponent implements OnInit {
     purchase.order = order;
     purchase.orderItems = orderItems;
 
-    //call REST API via the checkout service
-    this.checkoutService.placeOrder(purchase).subscribe({
-      next: response => {
-        alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
+    //compute payment info
+    this.paymentInfo.amount = Math.round(this.totalPrice * 100);
+    this.paymentInfo.currency = "USD";
 
-        //reset cart
-        this.resetCart();
-      },
-      error: err => {
-        alert(`There was an error: ${err.message}`);
-      }
-    });
-
+    //if valid form then
+    // - create payment intent
+    // - confirm card payment
+    // - place order
+    if(!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
+      // - create payment intent
+      this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
+        (paymentIntentResponse) => {
+          // - confirm card payment
+          this.stripe.confirmCardPayment(paymentIntentResponse.clientSecret,
+          {
+            payment_method: {
+              card: this.cardElement
+            }
+          }, {handleActions: false})
+          .then((result: any) => {
+            if (result.error) {
+              //display error message
+              alert(`There was an error: ${result.error.message}`);
+            } else {
+              // call REST API via the checkoutService
+              this.checkoutService.placeOrder(purchase).subscribe(
+                {
+                  next: (response) => {
+                    alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
+                    //reset cart
+                    this.resetCart();
+                  },
+                  error: (err: any) => {
+                    alert(`There was an error: ${err.message}`);
+                  }
+                })
+              }
+            });
+          }
+        );
+      } else {
+        this.checkoutFormGroup.markAllAsTouched();
+        return;
+      }         
   }
   resetCart() {
     //reset cart data
