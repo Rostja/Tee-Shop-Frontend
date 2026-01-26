@@ -32,6 +32,7 @@ var CheckoutComponent = /** @class */ (function () {
         this.storage = sessionStorage;
         //initialize Stripe API
         this.stripe = Stripe(environment_1.environment.stripePublishableKey);
+        //
         this.paymentInfo = new payment_info_1.PaymentInfo();
         this.displayError = "";
     }
