@@ -13,9 +13,13 @@ var CheckoutService = /** @class */ (function () {
     function CheckoutService(httpClient) {
         this.httpClient = httpClient;
         this.purchaseUrl = environment_1.environment.teaShopApiUrl + '/checkout/purchase';
+        this.paymentIntentUrl = environment_1.environment.teaShopApiUrl + '/checkout/payment-intent';
     }
     CheckoutService.prototype.placeOrder = function (purchase) {
         return this.httpClient.post(this.purchaseUrl, purchase);
+    };
+    CheckoutService.prototype.createPaymentIntent = function (paymentInfo) {
+        return this.httpClient.post(this.paymentIntentUrl, paymentInfo);
     };
     CheckoutService = __decorate([
         core_1.Injectable({
