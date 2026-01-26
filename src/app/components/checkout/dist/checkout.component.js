@@ -13,6 +13,8 @@ var tea_shop_validators_1 = require("../../validators/tea-shop-validators");
 var order_1 = require("../../common/order");
 var order_item_1 = require("../../common/order-item");
 var purchase_1 = require("../../common/purchase");
+var payment_info_1 = require("../../common/payment-info");
+var environment_1 = require("../../../environments/environment");
 var CheckoutComponent = /** @class */ (function () {
     function CheckoutComponent(formBuilder, teaShopFormService, cartService, checkoutService, router) {
         this.formBuilder = formBuilder;
@@ -28,9 +30,15 @@ var CheckoutComponent = /** @class */ (function () {
         this.shippingAddressRegions = [];
         this.billingAddressRegions = [];
         this.storage = sessionStorage;
+        //initialize Stripe API
+        this.stripe = Stripe(environment_1.environment.stripePublishableKey);
+        this.paymentInfo = new payment_info_1.PaymentInfo();
+        this.displayError = "";
     }
     CheckoutComponent.prototype.ngOnInit = function () {
         var _this = this;
+        //setup Sripe payment form
+        this.setupStripePaymentForm();
         this.reviewCartDetails();
         //read the users email address from browser storage
         var theEmail = this.storage.getItem('userEmail');
@@ -80,36 +88,47 @@ var CheckoutComponent = /** @class */ (function () {
                     tea_shop_validators_1.TeaShopValidators.notOnlyWhitespace])
             }),
             creditCard: this.formBuilder.group({
-                cardType: new forms_1.FormControl('', [forms_1.Validators.required]),
-                nameOnCard: new forms_1.FormControl('', [forms_1.Validators.required,
-                    forms_1.Validators.minLength(2),
-                    forms_1.Validators.maxLength(20),
-                    tea_shop_validators_1.TeaShopValidators.notOnlyWhitespace]),
-                cardNumber: new forms_1.FormControl('', [forms_1.Validators.required,
-                    forms_1.Validators.pattern('[0-9]{16}')]),
-                securityCode: new forms_1.FormControl('', [forms_1.Validators.required,
-                    forms_1.Validators.pattern('[0-9]{3}')]),
-                expirationMonth: [''],
-                expirationYear: ['']
+            /*
+            cardType: new FormControl('', [Validators.required]),
+            nameOnCard: new FormControl('', [Validators.required,
+                                            Validators.minLength(2),
+                                            Validators.maxLength(20),
+                                            TeaShopValidators.notOnlyWhitespace]),
+            cardNumber: new FormControl('', [Validators.required ,
+                                            Validators.pattern('[0-9]{16}')]),
+            securityCode: new FormControl('', [Validators.required ,
+                                            Validators.pattern('[0-9]{3}')]),
+            expirationMonth: [''],
+            expirationYear: [''],
+            */
             })
         });
-        //populate credit card months
-        var startMonth = new Date().getMonth() + 1;
-        console.log("startMonth: " + startMonth);
-        this.teaShopFormService.getCreditCardMonths(startMonth).subscribe(function (data) {
-            console.log("Retrieved credit card months: " + JSON.stringify(data));
-            _this.creditCardMonths = data;
-        });
-        //populate credit card years
-        this.teaShopFormService.getCreditCardYears().subscribe(function (data) {
-            console.log("Retrieved credit card years: " + JSON.stringify(data));
-            _this.creditCardYears = data;
-        });
+        /*
+      //populate credit card months
+      const startMonth: number = new Date().getMonth() + 1;
+      console.log("startMonth: " + startMonth);
+      this.teaShopFormService.getCreditCardMonths(startMonth).subscribe(
+        data => {
+          console.log("Retrieved credit card months: " + JSON.stringify(data));
+          this.creditCardMonths = data;
+        }
+      );
+      //populate credit card years
+      this.teaShopFormService.getCreditCardYears().subscribe(
+        data => {
+          console.log("Retrieved credit card years: " + JSON.stringify(data));
+          this.creditCardYears = data;
+        }
+      );
+      */
         //populate countries
         this.teaShopFormService.getCountries().subscribe(function (data) {
             console.log("Retrieved countries: " + JSON.stringify(data));
             _this.countries = data;
         });
+    };
+    CheckoutComponent.prototype.setupStripePaymentForm = function () {
+        throw new Error('Method');
     };
     CheckoutComponent.prototype.reviewCartDetails = function () {
         var _this = this;

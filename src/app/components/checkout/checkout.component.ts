@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { Order } from '../../common/order';
 import { OrderItem } from '../../common/order-item';
 import { Purchase } from '../../common/purchase';
+import { PaymentInfo } from '../../common/payment-info';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-checkout',
@@ -35,6 +37,13 @@ export class CheckoutComponent implements OnInit {
 
   storage: Storage = sessionStorage;
 
+  //initialize Stripe API
+  stripe = Stripe(environment.stripePublishableKey);
+
+  paymentInfo: PaymentInfo = new PaymentInfo();
+  cardElement: any;
+  displayError: any = "";
+
   constructor(private formBuilder: FormBuilder,
               private teaShopFormService: TeaShopFormService,
               private cartService: CartService,
@@ -43,6 +52,10 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    //setup Sripe payment form
+    this.setupStripePaymentForm();
+
     this.reviewCartDetails();
 
     //read the users email address from browser storage
@@ -97,6 +110,7 @@ export class CheckoutComponent implements OnInit {
                                         TeaShopValidators.notOnlyWhitespace]),
       }),
       creditCard: this.formBuilder.group({
+        /*
         cardType: new FormControl('', [Validators.required]),
         nameOnCard: new FormControl('', [Validators.required, 
                                         Validators.minLength(2), 
@@ -107,10 +121,12 @@ export class CheckoutComponent implements OnInit {
         securityCode: new FormControl('', [Validators.required ,
                                         Validators.pattern('[0-9]{3}')]),
         expirationMonth: [''],
-        expirationYear: [''],
+        expirationYear: [''], 
+        */
       }),
         
       });
+      /*
     //populate credit card months
     const startMonth: number = new Date().getMonth() + 1;
     console.log("startMonth: " + startMonth);
@@ -127,6 +143,7 @@ export class CheckoutComponent implements OnInit {
         this.creditCardYears = data;
       }
     );
+    */
 
     //populate countries
     this.teaShopFormService.getCountries().subscribe(
@@ -136,6 +153,11 @@ export class CheckoutComponent implements OnInit {
       }
     );
   }
+
+  setupStripePaymentForm(){
+    throw new Error('Method');
+  }
+  
   reviewCartDetails() {
     //subscribe to cart totalPrice
     this.cartService.totalPrice.subscribe(
