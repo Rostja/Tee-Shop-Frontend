@@ -39,7 +39,6 @@ export class CheckoutComponent implements OnInit {
 
   //initialize Stripe API
   stripe = Stripe(environment.stripePublishableKey);
-
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
   displayError: any = "";
