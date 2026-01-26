@@ -122,7 +122,7 @@ export class CheckoutComponent implements OnInit {
                                         Validators.pattern('[0-9]{3}')]),
         expirationMonth: [''],
         expirationYear: [''], 
-        */
+        *///
       }),
         
       });
@@ -156,7 +156,21 @@ export class CheckoutComponent implements OnInit {
   }
 
   setupStripePaymentForm(){
-    throw new Error('Method');
+    // get a handle to stripe elements
+    var elements = this.stripe.elements();
+    // create a card element
+    this.cardElement = elements.create('card', {hidePostalCode: true});
+    // add an instance of the card UI component into the 'card-element' div
+    this.cardElement.mount('#card-element');
+    // add event binding for the 'change' event on the card element
+    this.cardElement.on('change', (event: any) => {
+      this.displayError = document.getElementById('card-errors');
+      if (event.complete) {
+        this.displayError.textContent = "";
+      } else if (event.error) {
+        this.displayError.textContent = event.error.message;
+      }
+    });
   }
   
   reviewCartDetails() {
