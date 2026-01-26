@@ -39,11 +39,10 @@ export class CheckoutComponent implements OnInit {
 
   //initialize Stripe API
   stripe = Stripe(environment.stripePublishableKey);
-
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
   displayError: any = "";
-
+ 
   constructor(private formBuilder: FormBuilder,
               private teaShopFormService: TeaShopFormService,
               private cartService: CartService,
@@ -110,6 +109,7 @@ export class CheckoutComponent implements OnInit {
                                         TeaShopValidators.notOnlyWhitespace]),
       }),
       creditCard: this.formBuilder.group({
+
         /*
         cardType: new FormControl('', [Validators.required]),
         nameOnCard: new FormControl('', [Validators.required, 
@@ -126,6 +126,7 @@ export class CheckoutComponent implements OnInit {
       }),
         
       });
+      
       /*
     //populate credit card months
     const startMonth: number = new Date().getMonth() + 1;
