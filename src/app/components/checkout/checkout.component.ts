@@ -308,6 +308,8 @@ export class CheckoutComponent implements OnInit {
     this.paymentInfo.amount = Math.round(this.totalPrice * 100);
     this.paymentInfo.currency = "USD";
 
+    console.log(`Payment Info: ${JSON.stringify(this.paymentInfo)}`);
+
     //if valid form then
     // - create payment intent
     // - confirm card payment
