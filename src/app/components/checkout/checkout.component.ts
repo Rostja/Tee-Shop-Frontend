@@ -316,6 +316,8 @@ export class CheckoutComponent implements OnInit {
       // - create payment intent
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
+          console.log('Payment Intent Response:', paymentIntentResponse); 
+          console.log('Client Secret:', paymentIntentResponse.clientSecret); 
           // - confirm card payment
           this.stripe.confirmCardPayment(paymentIntentResponse.clientSecret,
           {
