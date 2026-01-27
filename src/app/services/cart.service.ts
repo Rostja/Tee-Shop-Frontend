@@ -104,19 +104,4 @@ export class CartService {
       this.computeCartTotals();
     }
   }
-
-  resetCart() {
-    // Vymaž všetky položky z košíka
-    this.cartItems = [];
-    
-    // Nastav totály na 0
-    this.totalPrice.next(0);
-    this.totalQuantity.next(0);
-    
-    // Vymaž z localStorage
-    this.storage.removeItem('cartItems');
-    
-    // Log pre debugging
-    console.log('Cart has been reset');
-  }
 }

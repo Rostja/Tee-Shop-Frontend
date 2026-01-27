@@ -354,14 +354,24 @@ export class CheckoutComponent implements OnInit {
       }         
   }
   resetCart() {
-    this.cartService.resetCart();
+    //reset cart data
+    this.cartService.cartItems = [];
+    
+    // Nastav totály na 0
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuantity.next(0);
+    
+    // Vymaž z localStorage
+    this.cartService.persistCartItems();
 
-    //reset the form
+    // Resetuj formulář
     this.checkoutFormGroup.reset();
 
-    //navigate back to the products page
-    this.router.navigateByUrl("/products");
-
+    // Přesměruj na hlavní stránku
+    this.router.navigateByUrl('/products');
+    
+    // Log pre debugging
+    console.log('Cart has been reset');
   }
 
    handleMonthsAndYears() {
