@@ -350,10 +350,7 @@ export class CheckoutComponent implements OnInit {
       }         
   }
   resetCart() {
-    //reset cart data
-    this.cartService.cartItems = [];
-    this.cartService.totalPrice.next(0);
-    this.cartService.totalQuantity.next(0);
+    this.cartService.resetCart();
 
     //reset the form
     this.checkoutFormGroup.reset();
