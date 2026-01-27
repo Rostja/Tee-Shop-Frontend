@@ -42,6 +42,8 @@ export class CheckoutComponent implements OnInit {
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
   displayError: any = "";
+
+  isDisabled: boolean = false;
  
   constructor(private formBuilder: FormBuilder,
               private teaShopFormService: TeaShopFormService,
@@ -315,6 +317,8 @@ export class CheckoutComponent implements OnInit {
     // - confirm card payment
     // - place order
     if(!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
+
+      this.isDisabled = true; // disable the pay button to prevent multiple clicks
       // - create payment intent
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
@@ -342,6 +346,7 @@ export class CheckoutComponent implements OnInit {
             if (result.error) {
               //display error message
               alert(`There was an error: ${result.error.message}`);
+              this.isDisabled = false; // re-enable the pay button
             } else {
               // call REST API via the checkoutService
               this.checkoutService.placeOrder(purchase).subscribe(
@@ -350,9 +355,11 @@ export class CheckoutComponent implements OnInit {
                     alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
                     //reset cart
                     this.resetCart();
+                    this.isDisabled = false; // re-enable the pay button
                   },
                   error: (err: any) => {
                     alert(`There was an error: ${err.message}`);
+                    this.isDisabled = false; // re-enable the pay button
                   }
                 })
               }
